@@ -28,6 +28,7 @@ git branchで
     - git push
 
 ## GitHub上で「Merge」
+手動でコピペする
 
 ## ローカルを更新
 git switch main
