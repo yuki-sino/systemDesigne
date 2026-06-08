@@ -36,3 +36,4 @@ git pull origin main
 # 便利
 - git status
 - git log
+- git fetch
