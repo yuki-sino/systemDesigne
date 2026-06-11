@@ -4,6 +4,8 @@ featureブランチ下で新たな機能を実装後、mainに反映する。
 xxxでそのブランチで実装する機能を示す。
 ## ローカルを更新
 git switch main
+git fetch
+git log --oneline --graph --all
 git pull origin main
 
 ## ブランチに移動
@@ -28,6 +30,7 @@ git branchで
     - git push
 
 ## GitHub上で「Merge」
+手動でコピペする
 
 ## ローカルを更新
 git switch main
