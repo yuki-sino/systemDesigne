@@ -7,6 +7,15 @@ from copy import deepcopy as cp
 import math
 
 # 行動方策一覧
+def select_greedy(Q, state, actions, dummy=None):
+  """Greedy選択関数"""
+  Qvalues = np.array([Q[state, action] for action in actions])
+  idx = np.where(Qvalues == Qvalues.max())
+  if len(idx[0]) > 1:
+    action_selected = actions[random.choice(idx[0])]
+  else:
+    action_selected = actions[idx[0][0]]
+  return action_selected
 
 # ランダムに選ぶ分布
 def random_distribution(Q, state, actions, dummy=None):
