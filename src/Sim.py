@@ -63,7 +63,6 @@ def sim(epi, env, agent):
               ims.append([im])
 
           turn += 1
-#       print(f'terminal! erapsed:{turn}[turn]')
       steps.append(turn)
 
       # 最後はeval 用
