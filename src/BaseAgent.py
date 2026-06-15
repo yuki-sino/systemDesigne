@@ -77,19 +77,17 @@ class BaseAgent(object):
     probs = np.zeros(len(self._actions))
 
     for policy, rate in zip(self._behavior_policies, self._policy_rate):
-        if policy.__name__ == 'ucb_distribution':
-            param = (self._eps, self._count_action)
-        else:
-            param = self._eps
-
         probs += np.array(
             policy(
                 self._Q,
                 s,
                 self._actions,
-                param
+                self
             )
         ) * rate
+
+    probs /= probs.sum()
+    return tuple(probs)
 
     probs /= probs.sum()
     return tuple(probs)
