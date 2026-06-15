@@ -34,7 +34,7 @@ class OffPolicyAgent(BaseAgent):
 
     if term:
         self._Q[(self._current_s, self._last_action)] += self._alpha * r
-        self._update_param() # 終端についたら探索パラメータを更新 (ここでなくてもよい)
+        self._update_param()
     else:
         self._update_s = cp(self._current_s)
         self._update_action = cp(self._last_action)

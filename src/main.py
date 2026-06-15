@@ -14,7 +14,7 @@ import Policy as pol
 # main
 episode = 200
 env = Env()
-agent = OffPolicyAgent(env.width, env.height, param=(0.1, 0.9, 0.1), behavior_policies=[pol.random_distribution, pol.greedy_distribution], policy_rate=[1,1],  name='Q+e-greedy')
+agent = OffPolicyAgent(env.width, env.height, param=(0.1, 0.9, 0.1), behavior_policies=[pol.ucb_distribution], policy_rate=[1],  name='UCB')
 
 steps_Q_e_greedy = sim(epi=episode, env=env, agent=agent)
 
