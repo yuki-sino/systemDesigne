@@ -47,3 +47,8 @@ def softmax_distribution(Q, state, actions, agent):
   Qvalues = np.array([Q[state, action] for action in actions])
   p_boltzmann = dist_boltzmann(Qvalues, tau)
   return p_boltzmann[0], p_boltzmann[1], p_boltzmann[2], p_boltzmann[3]
+
+def dist_boltzmann(Q, tau):
+  """Boltzmann 分布　= Softmax変換関数"""
+  trQ = np.exp(Q - np.max(Q))/tau
+  return trQ / trQ.sum(axis=0)
