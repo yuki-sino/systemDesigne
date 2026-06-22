@@ -9,12 +9,14 @@ from Env import Env
 from OffAgent import OffPolicyAgent
 from Sim import sim
 import Policy as pol
+from Env3 import Env3
 
 
 # main
 episode = 200
-env = Env()
-agent = OffPolicyAgent(env.width, env.height, param=(0.1, 0.9, 0.1), behavior_policies=[pol], policy_rate=[1],  name='UCB')
+# env = Env()
+env = Env3()
+agent = OffPolicyAgent(env.width, env.height, param=(0.1, 0.9, 0.1, 0.01), behavior_policies=[pol.ucb_distribution], policy_rate=[1],  name='UCB')
 
 steps_Q_e_greedy = sim(epi=episode, env=env, agent=agent)
 

@@ -32,9 +32,29 @@ class OffPolicyAgent(BaseAgent):
         target = self._pre_r + self._gamma * self._Q[(self._current_s, buckup_action)] - self._Q[(self._update_s, self._update_action)]
         self._Q[(self._update_s, self._update_action)] += self._alpha * target
 
+        # VARIANCE
+        # 分散の更新しき
+        target_v = target**2 + self._gamma**2 * self._V[(self._current_s, buckup_action)] - self._V[(self._update_s, self._update_action)]
+        self._V[(self._update_s, self._update_action)] += self._alpha_v * target_v
+
     if term:
         self._Q[(self._current_s, self._last_action)] += self._alpha * r
         self._update_param()
+
+        # VARIANCE
+        # 終端の分散更新式
+        td_error = (
+            r
+            - self._Q[(self._current_s, self._last_action)]
+        )
+        td_error_v = (
+            td_error**2
+            - self._V[(self._current_s, self._last_action)]
+        )
+
+        self._V[(self._current_s, self._last_action)] += (
+            self._alpha_v * td_error_v
+        )
     else:
         self._update_s = cp(self._current_s)
         self._update_action = cp(self._last_action)
