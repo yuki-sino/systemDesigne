@@ -7,6 +7,8 @@ from copy import deepcopy as cp
 
 import Policy as pol
 
+import Riskmap as risk
+
 # エージェントのベースモデル
 ## 継承して update 関数を実装して使う
 class BaseAgent(object):
@@ -26,6 +28,9 @@ class BaseAgent(object):
     self._gamma = param[1] #割引率
     self._eps = param[2] # epsilon (探索率初期値)
     self._tau = 1.0 # 温度パラメータ
+
+    r = risk.RiskMap()
+    self._riskmap = r.makeMap([(5,5), (7,7)])
 
     self._current_s = None
     self._update_s = None
@@ -61,6 +66,10 @@ class BaseAgent(object):
   @property
   def tau(self):
     return self._tau
+  
+  @property
+  def riskmap(self):
+    return self._riskmap
 
   @tau.setter
   def tau(self, tau):

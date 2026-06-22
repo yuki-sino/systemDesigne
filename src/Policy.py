@@ -6,6 +6,10 @@ from collections import Counter
 from copy import deepcopy as cp
 import math
 
+import Policy_24rd172
+
+import Policy_yuki_sino
+
 # 行動方策一覧
 def select_greedy(Q, state, actions, dummy=None):
   """Greedy選択関数"""
@@ -52,3 +56,9 @@ def dist_boltzmann(Q, tau):
   """Boltzmann 分布　= Softmax変換関数"""
   trQ = np.exp(Q - np.max(Q))/tau
   return trQ / trQ.sum(axis=0)
+
+def ucb_distribution(Q, state, actions, agent):
+  return Policy_24rd172.ucb_distribution(Q, state, actions, agent)
+
+def Mean_Variance_Objective(Q, state, actions, agent):
+  return Policy_yuki_sino.Mean_Variance_Objective(Q, state, actions, agent)
