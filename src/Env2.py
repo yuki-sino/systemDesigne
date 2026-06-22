@@ -1,3 +1,12 @@
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from collections import Counter
+from copy import deepcopy as cp
+
+from Env import Env
+
 class Env2(Env):
     def __init__(self, post_coordinates=(0, 7), pos_goal=(11, 7)):
         super().__init__(post_coordinates, pos_goal)
@@ -5,8 +14,7 @@ class Env2(Env):
     def init_episode(self):
         super().init_episode()
 
-        walls = [(5,0),(5,1),(5,2)
-        ]
+        walls = [(5,0),(5,1),(5,2)]
 
         for wx, wy in walls:
             self._state[wx][wy] = 8
