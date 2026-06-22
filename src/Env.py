@@ -6,6 +6,15 @@ from collections import Counter
 from copy import deepcopy as cp
 
 # 崖歩き課題環境を作成
+a = [
+      [2,2,2,2,2,2,2,2,2,2,2,2],
+      [2,1,0,0,0,0,0,0,0,2,0,2],
+      [2,0,0,5,5,0,0,0,0,2,0,2],
+      [2,0,0,5,5,0,0,0,0,2,0,2],
+      [2,0,0,0,0,0,0,0,0,0,0,2],
+      [2,0,0,0,0,0,0,0,0,0,0,2],
+      [2,0,0,0,0,0,0,0,0,0,9,2],
+      [2,2,2,2,2,2,2,2,2,2,2,2]]
 class Env(object):
   """Glid World Environment class
 
@@ -29,9 +38,11 @@ class Env(object):
   _goal(tuple(int, int)):
     ゴールの位置
   """
-  def __init__(self, post_coordinates=(0, 7), pos_goal=(11, 7)):
+
+  def __init__(self, post_coordinates=(1, 1), pos_goal=(10, 6)):
     self._size = {'width': 12, 'height': 8}
-    self._state = [[0 for _ in range(self._size['height'])] for _ in range(self._size['width'])]
+    # self._state = [[0 for _ in range(self._size['height'])] for _ in range(self._size['width'])]
+    self._state = a
 
     self._coordinates = post_coordinates
     self._s = post_coordinates
@@ -56,14 +67,20 @@ class Env(object):
   def height(self):
     return self._size['height']
 
-  def _limit_pos(self, pos, direct):
+  # def _limit_pos(self, pos, direct):
+  #   """Agentの移動範囲制御"""
+  #   if pos < 0:
+  #       return 0
+  #   if pos > self._size[direct] - 1:
+  #       return self._size[direct] - 1
+    
+  def _limit_pos(self, currentpos_x, currentpos_y, action_x, action_y):
     """Agentの移動範囲制御"""
-    if pos < 0:
-        return 0
-    if pos > self._size[direct] - 1:
-        return self._size[direct] - 1
+    if self._state[currentpos_x + action_x][ currentpos_y + action_y] == 2:
+        return currentpos_x, currentpos_y
 
-    return pos
+    return currentpos_x + action_x, currentpos_y + action_y
+  
   def get_state(self):
     """現在状態の取得"""
     return self._coordinates
@@ -79,8 +96,9 @@ class Env(object):
     term = False
     self._state[coordinate_x][coordinate_y] = 0
 
-    coordinate_x = self._limit_pos(coordinate_x + dif_x, 'width')
-    coordinate_y = self._limit_pos(coordinate_y + dif_y, 'height')
+    # coordinate_x = self._limit_pos(coordinate_x + dif_x, 'width')
+    # coordinate_y = self._limit_pos(coordinate_y + dif_y, 'height')
+    coordinate_x, coordinate_y = self._limit_pos(coordinate_x, coordinate_y, dif_x, dif_y )
 
     s_post = (coordinate_x, coordinate_y)
 

@@ -1,6 +1,7 @@
 import numpy as np
 import random
 
+全部のますに分散を学習できるようなQみたいな
 def Mean_Variance_Objective(Q, state, actions, agent):
     # lam = agent.lam
     lam = 0.9
@@ -23,7 +24,8 @@ def Mean_Variance_Objective(Q, state, actions, agent):
             p, r, v = riskmap[nx][ny]
             fear_bonus = p * r - lam * p * v 
             # mv = p * r - lam * p * v
-            mv = q_val + fear_bonus
+            mv = fear_bonus
+            q_val - v
         mv_values.append(mv)
 
     mv_values = np.array(mv_values)
