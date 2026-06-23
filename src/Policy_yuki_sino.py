@@ -2,7 +2,7 @@
 import numpy as np
 
 def mv(Q, state, actions, agent=None):
-    alpha = 0
+    alpha = 0.5
     Qvalues = np.array([Q[state, action] for action in actions])
     Vvalues = np.array([agent._V[state, action] for action in actions])
     scores = Qvalues - alpha*Vvalues
