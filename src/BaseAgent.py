@@ -35,7 +35,7 @@ class BaseAgent(object):
     self._current_s = None
     self._update_s = None
     self._actions = [up, down, left, right]
-    self._Q = {((i, j), action): 0 for i in range(width) for j in range(height) for action in self._actions}
+    self._Q = {((i, j), action): 0 for i in range(self._width) for j in range(self._height) for action in self._actions}
     self._count_action = Counter()
     self._pre_r = None
 
