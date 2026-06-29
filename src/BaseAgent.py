@@ -27,7 +27,7 @@ class BaseAgent(object):
     self._eps = param[2] # epsilon (探索率初期値)
     # VARIANCE
     self._alpha_v = param[3] #分散用学習率
-    self._tau = 1.0 # 温度パラメータ
+    self._tau = 0.1 # 温度パラメータ 0に近いほどグリーディー
 
     self._current_s = None
     self._update_s = None

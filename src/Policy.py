@@ -61,3 +61,6 @@ def ucb_distribution(Q, state, actions, agent):
 
 def mv(Q, state, actions, agent):
   return Policy_yuki_sino.mv(Q, state, actions, agent)
+
+def mv_selectRisk(Q, state, actions, agent=None):
+  return Policy_yuki_sino.mv_selectRisk(Q, state, actions, agent)

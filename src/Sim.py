@@ -29,6 +29,7 @@ def sim(epi, env, agent):
   episode = epi
 
   count = Counter() #行動選択の偏り確認用カウンター
+  countAll = Counter() #sim全体の行動回数カウンター
   steps = [] # ゴール到達までにかかったstep数保存用
 
   # 描画アニメ用
@@ -49,6 +50,7 @@ def sim(epi, env, agent):
       #エピソード主要部、終端状態までループ
       while(not term):
           s = env.get_state() # 環境から状態を観測
+          countAll[s] += 1
           a = agent.select_action(s) # エージェントが行動選択
           if state_print:
               print(f'agent select {a}')
@@ -74,4 +76,6 @@ def sim(epi, env, agent):
   ani = animation.ArtistAnimation(fig, ims, blit=True, interval=1000, repeat_delay=1000)
   ani.save("test.gif", writer='imagemagick')
   agent.print_optimal()
-  return steps
+
+
+  return steps, countAll
