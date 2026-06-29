@@ -80,7 +80,7 @@ def sim(epi, env, agent):
 
   # gitアニメーションとして保存
   ani = animation.ArtistAnimation(fig, ims, blit=True, interval=1000, repeat_delay=1000)
-  ani.save("test.gif", writer='imagemagick')
+  ani.save("../ToMe/test.gif", writer='imagemagick')
   agent.print_optimal()
 
 

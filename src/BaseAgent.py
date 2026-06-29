@@ -10,7 +10,7 @@ import Policy as pol
 # エージェントのベースモデル
 class BaseAgent(object):
 
-  def __init__(self, width=7, height=7, param=(0.1, 0.9, 0.0, 0.01), behavior_policies=None, policy_rate=None, name='Q_eg'):
+  def __init__(self, env=None, param=(0.1, 0.9, 0.0, 0.01), behavior_policies=None, policy_rate=None, name='Q_eg'):
     up = (0, -1) # 上に行く行動
     down = (0, 1) # 下に行く行動
     left = (-1, 0) # 左に行く行動
@@ -37,8 +37,8 @@ class BaseAgent(object):
     self._current_s = None
     self._update_s = None
     self._actions = [up, down, left, right]
-    self._Q = {((i, j), action): 0 for i in range(width) for j in range(height) for action in self._actions}
-    self._V = {((i, j), action): 0 for i in range(width) for j in range(height) for action in self._actions}
+    self._Q = {((i, j), action): 0 for i in range(self._width) for j in range(self._height) for action in self._actions}
+    self._V = {((i, j), action): 0 for i in range(self._width) for j in range(self._height) for action in self._actions}
     self._count_action = Counter()
     self._pre_r = None
 
