@@ -11,7 +11,7 @@ import Policy as pol
 ## 継承して update 関数を実装して使う
 class BaseAgent(object):
 
-  def __init__(self, width=7, height=7, param=(0.1, 0.9, 0.0), behavior_policies=None, policy_rate=None, name='Q_eg'):
+  def __init__(self, width=7, height=7, param=(0.1, 0.9, 0.0, 0.01), behavior_policies=None, policy_rate=None, name='Q_eg'):
     up = (0, -1) # 上に行く行動
     down = (0, 1) # 下に行く行動
     left = (-1, 0) # 左に行く行動
@@ -25,12 +25,15 @@ class BaseAgent(object):
     self._alpha = param[0] #学習率
     self._gamma = param[1] #割引率
     self._eps = param[2] # epsilon (探索率初期値)
-    self._tau = 1.0 # 温度パラメータ
+    # VARIANCE
+    self._alpha_v = param[3] #分散用学習率
+    self._tau = 0.1 # 温度パラメータ 0に近いほどグリーディー
 
     self._current_s = None
     self._update_s = None
     self._actions = [up, down, left, right]
     self._Q = {((i, j), action): 0 for i in range(width) for j in range(height) for action in self._actions}
+    self._V = {((i, j), action): 0 for i in range(width) for j in range(height) for action in self._actions}
     self._count_action = Counter()
     self._pre_r = None
 
