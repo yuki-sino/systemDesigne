@@ -8,7 +8,6 @@ from copy import deepcopy as cp
 import Policy as pol
 
 # エージェントのベースモデル
-## 継承して update 関数を実装して使う
 class BaseAgent(object):
 
   def __init__(self, width=7, height=7, param=(0.1, 0.9, 0.0, 0.01), behavior_policies=None, policy_rate=None, name='Q_eg'):
@@ -17,8 +16,14 @@ class BaseAgent(object):
     left = (-1, 0) # 左に行く行動
     right = (1, 0) # 右に行く行動
 
-    self._height = height
-    self._width = width
+    if env is not None:
+        self._env = env
+        self._width = env.width
+        self._height = env.height
+    else:
+        self._env = None
+        self._width = 7
+        self._height = 7
 
     self._last_action = None
     self._update_action = None
@@ -91,9 +96,6 @@ class BaseAgent(object):
 
     probs /= probs.sum()
     return tuple(probs)
-
-    probs /= probs.sum()
-    return tuple(probs)
   
   def _mix_select(self, s):
     props = self._mix_distribution(s)
@@ -115,9 +117,7 @@ class BaseAgent(object):
     self._tau = 1.0*self._tau
 
   def update(self, r, next_s, term):
-    # 継承して実装
     pass
-
 
   def print_optimal(self):
     """最適方策(Greedy選択)表示用"""

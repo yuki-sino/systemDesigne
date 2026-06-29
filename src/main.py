@@ -6,6 +6,7 @@ from collections import Counter
 from copy import deepcopy as cp
 
 from Env import Env
+from Env2 import Env2
 from OffAgent import OffPolicyAgent
 from Sim import sim
 import Policy as pol
