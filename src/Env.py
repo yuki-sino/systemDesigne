@@ -109,5 +109,5 @@ class Env(object):
     C = list(map(list, zip(*self._state)))
     im = plt.pcolor(X, Y, C, cmap=plt.cm.gray_r)
     plt.grid(True, which='both', axis='both', linestyle='-', color='k')
-    plt.show()
+    # plt.show()
     return im
