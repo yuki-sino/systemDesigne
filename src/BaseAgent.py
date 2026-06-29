@@ -10,14 +10,20 @@ import Policy as pol
 # エージェントのベースモデル
 class BaseAgent(object):
 
-  def __init__(self, width=7, height=7, param=(0.1, 0.9, 0.0), behavior_policies=None, policy_rate=None, name='Q_eg'):
+  def __init__(self, env=None, param=(0.1, 0.9, 0.0), behavior_policies=None, policy_rate=None, name='Q_eg'):
     up = (0, -1) # 上に行く行動
     down = (0, 1) # 下に行く行動
     left = (-1, 0) # 左に行く行動
     right = (1, 0) # 右に行く行動
 
-    self._height = height
-    self._width = width
+    if env is not None:
+        self._env = env
+        self._width = env.width
+        self._height = env.height
+    else:
+        self._env = None
+        self._width = 7
+        self._height = 7
 
     self._last_action = None
     self._update_action = None
